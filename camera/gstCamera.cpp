@@ -265,12 +265,12 @@ bool gstCamera::buildLaunchStr()
 	
 //#define CAPS_STR "video/x-raw(memory:NVMM), width=(int)2592, height=(int)1944, format=(string)I420, framerate=(fraction)30/1"
 //#define CAPS_STR "video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080, format=(string)I420, framerate=(fraction)30/1"
-	mWidth     = 1280;
-	mHeight    = 720;
+	mWidth     = 1280/2;
+	mHeight    = 720/2;
 	mDepth     = 12;
 	mSize      = (mWidth * mHeight * mDepth) / 8;
 	
-	ss << "nvcamerasrc fpsRange=\"30.0 30.0\" ! video/x-raw(memory:NVMM), width=(int)" << mWidth << ", height=(int)" << mHeight << ", format=(string)NV12 ! nvvidconv flip-method=2 ! "; //'video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080, format=(string)I420, framerate=(fraction)30/1' ! ";
+	ss << "nvcamerasrc fpsRange=\"1.0 1.0\" ! video/x-raw(memory:NVMM), width=(int)" << mWidth << ", height=(int)" << mHeight << ", format=(string)NV12 ! nvvidconv flip-method=2 ! "; //'video/x-raw(memory:NVMM), width=(int)1920, height=(int)1080, format=(string)I420, framerate=(fraction)30/1' ! ";
 	ss << "video/x-raw ! appsink name=mysink";
 	
 	mLaunchStr = ss.str();

@@ -86,8 +86,8 @@ bool glDisplay::initWindow()
 
 	// retrieve screen info
 	const int screenIdx   = DefaultScreen(mDisplayX);
-	const int screenWidth = DisplayWidth(mDisplayX, screenIdx);
-	const int screenHeight = DisplayHeight(mDisplayX, screenIdx);
+	const int screenWidth = DisplayWidth(mDisplayX, screenIdx)/2;
+	const int screenHeight = DisplayHeight(mDisplayX, screenIdx)/2;
 	
 	printf("default X screen %i:   %i x %i\n", screenIdx, screenWidth, screenHeight);
 	
@@ -163,7 +163,19 @@ bool glDisplay::initWindow()
 
 
 void glDisplay::SetTitle( const char* str )
-{
+{/*
+	char *msg = "Hello, world!";
+        int sidx = DefaultScreen(mDisplayX);
+        XColor color, dummy;
+        XGCValues gc_values;
+        GC gc;
+
+        XAllocNamedColor(mDisplayX, DefaultColormap(mDisplayX, sidx),"white", &color, &dummy);
+        gc_values.foreground = color.pixel;
+        gc = XCreateGC(mDisplayX, mWindowX, GCForeground, &gc_values);
+        //XFillRectangle(mDisplayX, mWindowX, DefaultGC(mDisplayX, sidx), 20, 20, 10, 10);
+	XDrawString(mDisplayX, mWindowX, gc, 10, 50, msg, strlen(msg));
+*/
 	XStoreName(mDisplayX, mWindowX, str);
 }
 
