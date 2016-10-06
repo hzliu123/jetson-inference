@@ -180,7 +180,9 @@ int main( int argc, char** argv )
 				// draw the texture
 				texture->Render(100,100);		
 			}
-		        output(10, 50, 200, 200, 200, GLUT_BITMAP_TIMES_ROMAN_24, "Hello world!");
+			char str[256];
+			sprintf(str, "%05.2f%% %s", confidence * 100.0f, net->GetClassDesc(img_class));
+		        output(10, 50, 200, 200, 200, GLUT_BITMAP_TIMES_ROMAN_24, str);
 
 			display->EndRender();
 		}
