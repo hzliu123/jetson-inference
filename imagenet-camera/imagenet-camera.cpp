@@ -14,6 +14,7 @@
 #include "cudaNormalize.h"
 #include "imageNet.h"
 
+#include <GL/glut.h>
 
 bool signal_recieved = false;
 
@@ -26,6 +27,16 @@ void sig_handler(int signo)
 	}
 }
 
+void output(int x, int y, float r, float g, float b, void* font, char *string)
+{
+  glColor3f( r, g, b );
+  glRasterPos2f(x, y);
+  int len, i;
+  len = (int)strlen(string);
+  for (i = 0; i < len; i++) {
+    glutBitmapCharacter(font, string[i]);
+  }
+}
 
 int main( int argc, char** argv )
 {
@@ -35,7 +46,8 @@ int main( int argc, char** argv )
 		printf("%i [%s]  ", i, argv[i]);
 		
 	printf("\n\n");
-	
+
+        glutInit(&argc, argv);	
 
 	/*
 	 * parse network type from CLI arguments
@@ -140,7 +152,7 @@ int main( int argc, char** argv )
 				sprintf(str, "GIE build %x | %s | %04.1f FPS | %05.2f%% %s", NV_GIE_VERSION, net->GetNetworkName(), display->GetFPS(), confidence * 100.0f, net->GetClassDesc(img_class));
 				display->SetTitle(str);	
 			}	
-		}	
+		}
 
 
 		// update display
@@ -168,6 +180,7 @@ int main( int argc, char** argv )
 				// draw the texture
 				texture->Render(100,100);		
 			}
+		        output(10, 50, 200, 200, 200, GLUT_BITMAP_TIMES_ROMAN_24, "Hello world!");
 
 			display->EndRender();
 		}
